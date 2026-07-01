@@ -1,6 +1,6 @@
 
 //Create websocket
-var socket = new WebSocket("ws://localhostL:8080/ws");
+var socket = new WebSocket("ws://localhost:8080/ws");
 
 //Listen for events on a socket 
 let connect = () => {
