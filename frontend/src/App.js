@@ -15,7 +15,7 @@ function App() {
     connect();
   }, []);
   return (
-    <div className="App">
+    <div className="text-center border border-red-400">
       <button onClick={send}> Click Me!</button>
     </div>
   );
