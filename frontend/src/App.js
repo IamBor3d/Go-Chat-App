@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import { sendMsg, connect } from './api';
 import { useEffect } from 'react';
 import './App.css';
+import Header from './components/Header/Header';
 
 
 let send = ()=> {
@@ -15,8 +16,11 @@ function App() {
     connect();
   }, []);
   return (
-    <div className="text-center border border-red-400">
-      <button onClick={send}> Click Me!</button>
+    <div>
+      <Header/>
+      <div className="text-center p-3">
+        <button onClick={send} className=' border border-black p-5'> Click Me!</button>
+      </div>
     </div>
   );
 }
