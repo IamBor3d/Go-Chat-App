@@ -1,8 +1,9 @@
 import logo from './logo.svg';
 import { sendMsg, connect } from './api';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
+import ChatHistory from './components/ChatHistory/ChatHistory';
 
 
 let send = ()=> {
@@ -12,13 +13,23 @@ let send = ()=> {
 }
 
 function App() {
+  const [history, setHistory] = useState([]);
+  
+  
   useEffect(() => {
-    connect();
+    connect((msg) => {
+      console.log("New Message");
+      setHistory(prevHistory => [...prevHistory, msg]);
+    });
   }, []);
+
+  
+
   return (
     <div>
       <Header/>
       <div className="text-center p-3">
+        <ChatHistory chatHistory={history}></ChatHistory>
         <button onClick={send} className=' border border-black p-5'> Click Me!</button>
       </div>
     </div>
