@@ -4,12 +4,15 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import ChatHistory from './components/ChatHistory/ChatHistory';
+import ChatInput from './components/ChatInput/ChatInput';
 
 
-let send = ()=> {
-  let msg = "Hello";
-  console.log(msg);
-  sendMsg(msg);
+let send = (event) => {
+  if (event.keyCode === 13) {
+    sendMsg(event.target.value);
+    event.target.value = "";
+  }
+
 }
 
 function App() {
@@ -30,7 +33,7 @@ function App() {
       <Header/>
       <div className="text-center p-3">
         <ChatHistory chatHistory={history}></ChatHistory>
-        <button onClick={send} className=' border border-black p-5'> Click Me!</button>
+        <ChatInput send={send}/>
       </div>
     </div>
   );
