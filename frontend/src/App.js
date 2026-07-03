@@ -1,42 +1,18 @@
-import logo from './logo.svg';
-import { sendMsg, connect } from './api';
-import { useEffect, useState } from 'react';
-import './App.css';
-import Header from './components/Header/Header';
-import ChatHistory from './components/ChatHistory/ChatHistory';
-import ChatInput from './components/ChatInput/ChatInput';
-
-
-let send = (event) => {
-  if (event.keyCode === 13) {
-    sendMsg(event.target.value);
-    event.target.value = "";
-  }
-
-}
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ChatRoom from './pages/ChatRoom';
 
 function App() {
-  const [history, setHistory] = useState([]);
-  
-  
-  useEffect(() => {
-    connect((msg) => {
-      console.log("New Message");
-      setHistory(prevHistory => [...prevHistory, msg]);
-    });
-  }, []);
-
-  
-
   return (
-    <div>
-      <Header/>
-      <div className="text-center p-3">
-        <ChatHistory chatHistory={history}></ChatHistory>
-        <ChatInput send={send}/>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {/* The landing page to pick or create a room */}
+        <Route path="/" element={<p>This is hte home page</p>} />
+        
+        {/* The actual chat room page with a dynamic room ID */}
+        <Route path="/room/:roomId" element={<ChatRoom />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
 export default App;
