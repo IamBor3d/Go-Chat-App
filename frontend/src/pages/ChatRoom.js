@@ -4,6 +4,7 @@ import '../App.css';
 import Header from '../components/Header/Header';
 import ChatHistory from '../components/ChatHistory/ChatHistory';
 import ChatInput from '../components/ChatInput/ChatInput';
+import { useParams } from 'react-router-dom';
 
 let send = (event) => {
   if (event.keyCode === 13) {
@@ -16,9 +17,10 @@ let send = (event) => {
 function ChatRoom() {
   const [history, setHistory] = useState([]);
   
+  const {roomId} = useParams()
   
   useEffect(() => {
-    connect((msg) => {
+    connect(roomId,(msg) => {
       console.log("New Message");
       setHistory(prevHistory => [...prevHistory, msg]);
     });

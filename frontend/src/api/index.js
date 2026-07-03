@@ -1,12 +1,17 @@
 
 //Create websocket
-var socket = new WebSocket("ws://localhost:8080/ws");
+let socket = null //new WebSocket("ws://localhost:8080/ws");
 
 //Listen for events on a socket 
-let connect = cb => {
+let connect = (roomId, cb) => {
 
+    if (socket) {
+        
+        socket.close();
+    }
     console.log("Attempting Connection");
 
+    socket = new WebSocket(`ws://localhost:8080/room/${roomId}`)
     socket.onopen = () => {
         console.log("Successfully opened");
     };
