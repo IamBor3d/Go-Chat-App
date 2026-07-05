@@ -1,17 +1,24 @@
 import React from "react";
 
 const MakeRoom = ()=>{
-    const makeRoom = (formData) =>{
+    const makeRoom =  async (formData) =>{
 
 
         var roomName = formData.get("roomName");
         
         if (roomName) {
-            console.log("rom name: ", roomName)   
+           //Make room
+           const response = await fetch("http://localhost:8080/makeRoom", {
+                method: "POST",
+                body : JSON.stringify({
+                    "roomName" : roomName
+                }) 
+           })
     
         }
         else {
             console.log("No name given")
+            
         }
     }
     return (
